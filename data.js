@@ -367,21 +367,7 @@ const kpopData = {
       "Sori"
     ],
 
-    "Cosmic Girls": [
-      "Seola",
-      "Xuanyi",
-      "Bona",
-      "Exy",
-      "Soobin",
-      "Luda",
-      "Dawon",
-      "Eunseo",
-      "Cheng Xiao",
-      "Meiqi",
-      "Yeoreum",
-      "Dayoung",
-      "Yeonjung"
-    ],
+
     "Craxy": [
       "Chaey",
       "Swan",
