@@ -104,9 +104,6 @@ const kpopData = {
     "AKB48": [
       "Juri"
     ],
-    "AKMU": [
-      "Lee Soohyun"
-    ],
     "Alice": [
       "Karin",
       "Sohee",
@@ -884,12 +881,6 @@ const kpopData = {
       "Suhye",
       "MiU"
     ],
-    "LNGSHOT": [
-      "Louis",
-      "Ohyul",
-      "Ryul",
-      "Woojin"
-    ],
     "LOONA": [
       "Yeojin",
       "Hyeju",
@@ -1016,10 +1007,6 @@ const kpopData = {
       "Jane",
       "Yeonwoo",
       "Hyebin"
-    ],
-    "Nasty Nasty": [
-      "Sojin",
-      "Kyungri"
     ],
     "Nature": [
       "Sunshine",
@@ -1251,6 +1238,13 @@ const kpopData = {
     "Rockit Girl": [
       "Han Leeseul",
       "Della"
+    ],
+    "Rolling Quartz": [
+      "Arem",
+      "Iree",
+      "Yeongeun",
+      "Jayoung",
+      "Hyunjung"
     ],
     "S.E.T": [
       "Kwon Jieun",
@@ -1919,6 +1913,12 @@ const kpopData = {
       "Seoham (Former)",
       "Youjin (Former)"
     ],
+    "LNGSHOT": [
+      "Louis",
+      "Ohyul",
+      "Ryul",
+      "Woojin"
+    ],
     "Monsta X": [
       "Shownu",
       "Minhyuk",
@@ -2040,13 +2040,6 @@ const kpopData = {
       "Seunghan",
       "Sohee",
       "Anton"
-    ],
-    "Rolling Quartz": [
-      "Arem",
-      "Iree",
-      "Yeongeun",
-      "Jayoung",
-      "Hyunjung"
     ],
     "Seven O'Clock": [
       "Hangyeom",
@@ -2352,6 +2345,11 @@ const kpopData = {
       "BM",
       "Somin",
       "Jiwoo"
+    ],
+    "Nasty Nasty": [
+      "Kevin",
+      "Kyungri",
+      "Sojin"
     ],
     "Triple H": [
       "HyunA",
