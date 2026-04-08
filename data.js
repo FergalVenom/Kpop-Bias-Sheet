@@ -4,7 +4,7 @@ const kpopData = {
       "Shuhua",
       "Yuqi",
       "Soyeon",
-      "Soojin",
+      "Soojin (Former)",
       "Minnie",
       "Miyeon"
     ],
@@ -883,7 +883,7 @@ const kpopData = {
     ],
     "Le Sserafim": [
       "Hong Eunchae",
-      "Kim Garam",
+      "Kim Garam (Former)",
       "Kazuha",
       "Huh Yunjin",
       "Kim Chaewon",
@@ -1099,7 +1099,7 @@ const kpopData = {
       "Kyujin",
       "Jiwoo",
       "Bae",
-      "Jini",
+      "Jini (Former)",
       "Sullyoon",
       "Haewon",
       "Lily"
@@ -1708,10 +1708,10 @@ const kpopData = {
     ],
     "BIGBANG": [
       "G-Dragon",
-      "T.O.P",
+      "T.O.P (Former)",
       "Taeyang",
       "Daesung",
-      "Seungri"
+      "Seungri (Former)"
     ],
     "Bigflo": [
       "Jungkyun",
@@ -1900,7 +1900,8 @@ const kpopData = {
       "Bobby",
       "DK",
       "Ju-ne",
-      "Chan"
+      "Chan",
+      "B.I (Former)"
     ],
     "Infinite": [
       "Sungkyu",
@@ -1925,10 +1926,11 @@ const kpopData = {
     ],
     "KNK": [
       "Dongwon",
-      "Heejun",
+      "Heejun (Former)",
       "Inseong",
       "Jihun",
-      "Seoham"
+      "Seoham (Former)",
+      "Youjin (Former)"
     ],
     "Monsta X": [
       "Shownu",
@@ -2002,7 +2004,7 @@ const kpopData = {
       "Hwanwoong",
       "Keonhee",
       "Leedo",
-      "Ravn",
+      "Ravn (Former)",
       "Seoho",
       "Xion"
     ],
@@ -2040,7 +2042,8 @@ const kpopData = {
       "Yan An",
       "Yuto",
       "Kino",
-      "Wooseok"
+      "Wooseok",
+      "E'Dawn (Former)"
     ],
     "RIIZE": [
       "Shotaro",
@@ -2124,7 +2127,8 @@ const kpopData = {
       "Han",
       "Felix",
       "Seungmin",
-      "I.N"
+      "I.N",
+      "Woojin (Former)"
     ],
     "Super Junior": [
       "Leeteuk",
@@ -2158,7 +2162,8 @@ const kpopData = {
       "Q",
       "Ju Haknyeon",
       "Sunwoo",
-      "Eric"
+      "Eric",
+      "Hwall (Former)"
     ],
     "The Rose": [
       "Woosung",
@@ -2176,7 +2181,9 @@ const kpopData = {
       "Doyoung",
       "Haruto",
       "Park Jeongwoo",
-      "So Junghwan"
+      "So Junghwan",
+      "Mashiho (Former)",
+      "Bang Yedam (Former)"
     ],
     "TVXQ!": [
       "U-Know Yunho",
