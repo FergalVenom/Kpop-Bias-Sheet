@@ -185,6 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         groups.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase())).forEach(group => {
             const data = savedBiases[group];
+            const isSoloist = !!(kpopData.soloists && kpopData.soloists[group]);
             const card = document.createElement("div");
             card.className = "saved-card";
             card.innerHTML = `
@@ -192,6 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span>${group}</span>
                     ${viewingUsername ? '' : `<button class="remove-btn" data-group="${group}" title="Remove this group">&times;</button>`}
                 </div>
+                ${!isSoloist ? `
                 <div class="saved-card-item">
                     <span class="label">Bias:</span>
                     <span class="value crown">${data.bias}</span>
@@ -203,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="saved-card-item">
                     <span class="label">Wrecker 2:</span>
                     <span class="value star">${data.wrecker2}</span>
-                </div>
+                </div>` : ''}
                 ${data.favSong ? `
                 <div class="saved-card-item" style="margin-top: 1rem; padding-top: 0.5rem; border-top: 1px dashed rgba(255,255,255,0.1);">
                     <span class="label">Fav Song:</span>
@@ -229,6 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     groupSelect.addEventListener("change", (e) => {
         const selectedGroup = e.target.value;
+        const isSoloist = !!(kpopData.soloists && kpopData.soloists[selectedGroup]);
         const members = (kpopData.girlGroups && kpopData.girlGroups[selectedGroup]) ||
                         (kpopData.boyGroups && kpopData.boyGroups[selectedGroup]) ||
                         (kpopData.coedGroups && kpopData.coedGroups[selectedGroup]) ||
@@ -251,6 +254,16 @@ document.addEventListener("DOMContentLoaded", () => {
         populateMembers(wrecker1Select, existingData.wrecker1);
         populateMembers(wrecker2Select, existingData.wrecker2);
         favSongInput.value = existingData.favSong || '';
+
+        if (isSoloist) {
+            biasSelect.closest(".form-group").classList.add("hidden");
+            wrecker1Select.closest(".form-group").classList.add("hidden");
+            wrecker2Select.closest(".form-group").classList.add("hidden");
+        } else {
+            biasSelect.closest(".form-group").classList.remove("hidden");
+            wrecker1Select.closest(".form-group").classList.remove("hidden");
+            wrecker2Select.closest(".form-group").classList.remove("hidden");
+        }
 
         if (membersSection.classList.contains("hidden")) {
             membersSection.classList.remove("hidden");
@@ -284,6 +297,16 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!success) return;
 
         biasForm.classList.add("hidden");
+        const isSoloist = !!(kpopData.soloists && kpopData.soloists[group]);
+        if (isSoloist) {
+            resBias.closest(".result-item").classList.add("hidden");
+            resWrecker1.closest(".result-item").classList.add("hidden");
+            resWrecker2.closest(".result-item").classList.add("hidden");
+        } else {
+            resBias.closest(".result-item").classList.remove("hidden");
+            resWrecker1.closest(".result-item").classList.remove("hidden");
+            resWrecker2.closest(".result-item").classList.remove("hidden");
+        }
         resultGroup.textContent = group;
         resBias.textContent = savedBiases[group].bias;
         resWrecker1.textContent = savedBiases[group].wrecker1;
@@ -425,6 +448,11 @@ document.addEventListener("DOMContentLoaded", () => {
             
             friendSelect.innerHTML = '<option value="" disabled selected>Select friend...</option>';
             
+            if (snapshot.empty) {
+                console.warn("No users found in database.");
+                return;
+            }
+
             const users = [];
             snapshot.forEach(doc => {
                 users.push(doc.id);
@@ -438,6 +466,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         } catch (e) {
             console.error("Error fetching friends:", e);
+            alert("Error loading friends dropdown: " + e.message + "\n\nThis might be due to Firebase Security Rules preventing list queries. Please check your Firestore rules.");
         }
     }
 

@@ -75,13 +75,6 @@ const kpopData = {
       "Nakyoung",
       "Yooyeon"
     ],
-    "ADP": [
-      "Annie",
-      "Bailey",
-      "Tarzzan",
-      "Woochan",
-      "Youngseo"
-    ],
     "Adya": [
       "Seungchae",
       "Chaeeun",
@@ -816,10 +809,6 @@ const kpopData = {
       "Nicole",
       "Jiyoung",
       "Youngji"
-    ],
-    "KARD": [
-      "Jeon Jiwoo",
-      "Jeon Somin"
     ],
     "KATSEYE": [
       "Daniela",
@@ -1717,13 +1706,6 @@ const kpopData = {
       "Gikwang",
       "Dongwoon"
     ],
-    "Big Bang": [
-      "G-Dragon",
-      "T.O.P",
-      "Taeyang",
-      "Daesung",
-      "Seungri"
-    ],
     "BIGBANG": [
       "G-Dragon",
       "T.O.P",
@@ -1877,16 +1859,7 @@ const kpopData = {
       "Kris",
       "Tao"
     ],
-    "EXO (Current)": [
-      "Xiumin",
-      "Suho",
-      "Baekhyun",
-      "Chen",
-      "Chanyeol",
-      "D.O.",
-      "Kai",
-      "Sehun"
-    ],
+
     "F.T. Island": [
       "Hongki",
       "Jaejin",
@@ -2296,7 +2269,9 @@ const kpopData = {
       "N",
       "Leo",
       "Ken",
-      "Hyuk"
+      "Hyuk",
+      "Ravi (Former)",
+      "Hongbin (Former)"
     ],
     "Wanna One": [
       "Yoon Jisung",
@@ -2361,6 +2336,13 @@ const kpopData = {
     ]
   },
   "coedGroups": {
+    "ADP": [
+      "Annie",
+      "Bailey",
+      "Tarzzan",
+      "Woochan",
+      "Youngseo"
+    ],
     "AKMU": [
       "Lee Chanhyuk",
       "Lee Suhyun"
@@ -2371,7 +2353,7 @@ const kpopData = {
       "Yongseok",
       "Noah"
     ],
-    "Kard": [
+    "KARD": [
       "J.Seph",
       "BM",
       "Somin",
