@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Pop Bias Selector</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Firebase Libraries -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- FIREBASE USER NAVIGATION -->
+    <nav class="top-nav glass-form" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; margin: 1rem auto; max-width: 900px; width: 90%; gap: 1rem; border-radius: 12px; z-index: 100; position: relative;">
+        <div class="user-control" style="display: flex; gap: 0.5rem; align-items: center;">
+            <label for="currentUsername" style="margin: 0; white-space: nowrap;">👤 Me:</label>
+            <input type="text" id="currentUsername" class="custom-input" style="padding: 0.5rem; font-size: 0.9rem;" placeholder="Your name...">
+        </div>
+        <div class="friend-control" style="display: flex; gap: 0.5rem; align-items: center;">
+            <label for="friendUsername" style="margin: 0; white-space: nowrap;">🔍 Friend:</label>
+            <input type="text" id="friendUsername" class="custom-input" style="padding: 0.5rem; font-size: 0.9rem;" placeholder="Friend's name...">
+            <button id="loadFriendBtn" class="shortcut-btn" style="margin: 0; padding: 0.5rem 1rem;">View</button>
+            <button id="reloadMeBtn" class="shortcut-btn hidden" style="margin: 0; padding: 0.5rem 1rem; border-color: var(--primary);">Exit View</button>
+        </div>
+    </nav>
+
+    <!-- MAIN SELECTION DASHBOARD -->
+    <main class="container" id="mainScreen">
+        <header class="header">
+            <h1 class="title">My <span>K-Pop</span> Bias</h1>
+            <p class="subtitle">Select your favorite group and choose your ultimate biases.</p>
+            <button id="viewCollectionBtn" class="shortcut-btn">View Saved Collection 🤍</button>
+            <button id="viewTopListsBtn" class="shortcut-btn">My Top Lists 🏆</button>
+        </header>
+
+        <form class="glass-form" id="biasForm">
+            <!-- Group Selection -->
+            <div class="form-group">
+                <label for="groupSelect">Select Group</label>
+                <div class="custom-select-wrapper">
+                    <select id="groupSelect" name="group" required>
+                        <option value="" disabled selected>Select a group...</option>
+                        <!-- Options will be populated by JS -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- Members Section (Hidden until group is chosen) -->
+            <div id="membersSection" class="members-section hidden">
+                <div class="form-group slide-in" style="--delay: 1">
+                    <label for="biasSelect">Ultimate Bias <span class="crown">👑</span></label>
+                    <div class="custom-select-wrapper bias">
+                        <select id="biasSelect" name="bias">
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group slide-in" style="--delay: 2">
+                    <label for="wrecker1Select">Bias Wrecker 1 <span class="sparkle">✨</span></label>
+                    <div class="custom-select-wrapper wrecker">
+                        <select id="wrecker1Select" name="wrecker1">
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group slide-in" style="--delay: 3">
+                    <label for="wrecker2Select">Bias Wrecker 2 <span class="star">⭐</span></label>
+                    <div class="custom-select-wrapper wrecker">
+                        <select id="wrecker2Select" name="wrecker2">
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group slide-in" style="--delay: 4">
+                    <label for="favSongInput">Favorite Song <span class="music">🎵</span></label>
+                    <input type="text" id="favSongInput" name="favSong" class="custom-input" placeholder="Enter your favorite song...">
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn hidden" id="submitBtn">
+                <span>Save Selections</span>
+            </button>
+        </form>
+
+        <div id="resultCard" class="result-card hidden glass-form">
+            <h2 id="resultGroup"></h2>
+            <div class="result-item">
+                <span class="label">Bias:</span>
+                <span class="value" id="resBias"></span>
+            </div>
+            <div class="result-item">
+                <span class="label">Wrecker 1:</span>
+                <span class="value" id="resWrecker1"></span>
+            </div>
+            <div class="result-item">
+                <span class="label">Wrecker 2:</span>
+                <span class="value" id="resWrecker2"></span>
+            </div>
+            <div class="result-item">
+                <span class="label">Fav Song:</span>
+                <span class="value" id="resFavSong"></span>
+            </div>
+            <div class="action-buttons">
+                <button id="resetBtn" class="reset-btn action-btn">Pick Another</button>
+                <button id="goToCollectionBtn" class="submit-btn action-btn">View Collection</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- SAVED COLLECTION DASHBOARD -->
+    <main class="container expanded hidden" id="collectionScreen">
+        <header class="header collection-header">
+            <button id="backToMainBtn" class="back-btn">← Back</button>
+            <h1 class="title">My <span>Collection</span></h1>
+            <p class="subtitle" id="collectionSubtitle">Loading your saved biases...</p>
+        </header>
+
+        <div id="cardsGrid" class="cards-grid">
+            <!-- Saved cards will execute dynamically here -->
+        </div>
+        
+        <div class="empty-state hidden" id="emptyState">
+            <h3>No biases saved yet!</h3>
+            <p>Go back to the main screen to configure your first group.</p>
+        </div>
+    </main>
+
+    <!-- TOP LISTS DASHBOARD -->
+    <main class="container expanded hidden" id="topListsScreen">
+        <header class="header collection-header">
+            <button id="backFromTopListsBtn" class="back-btn">← Back</button>
+            <h1 class="title">My <span>Top Lists</span></h1>
+            <p class="subtitle">Your absolute favorites across all of K-Pop.</p>
+        </header>
+
+        <form class="glass-form top-lists-form" id="topListsForm">
+            <div class="top-lists-grid">
+                
+                <!-- Songs Section -->
+                <div class="list-section">
+                    <h3>Top 5 Current Songs 🎵</h3>
+                    <div class="list-inputs">
+                        <div class="input-row"><span class="number">1</span><input type="text" class="custom-input" id="currSong1" placeholder="Song Name"></div>
+                        <div class="input-row"><span class="number">2</span><input type="text" class="custom-input" id="currSong2" placeholder="Song Name"></div>
+                        <div class="input-row"><span class="number">3</span><input type="text" class="custom-input" id="currSong3" placeholder="Song Name"></div>
+                        <div class="input-row"><span class="number">4</span><input type="text" class="custom-input" id="currSong4" placeholder="Song Name"></div>
+                        <div class="input-row"><span class="number">5</span><input type="text" class="custom-input" id="currSong5" placeholder="Song Name"></div>
+                    </div>
+                </div>
+
+                <div class="list-section">
+                    <h3>Top 5 All-Time Songs 🎧</h3>
+                    <div class="list-inputs">
+                        <div class="input-row"><span class="number">1</span><input type="text" class="custom-input" id="allTimeSong1" placeholder="Song Name"></div>
+                        <div class="input-row"><span class="number">2</span><input type="text" class="custom-input" id="allTimeSong2" placeholder="Song Name"></div>
+                        <div class="input-row"><span class="number">3</span><input type="text" class="custom-input" id="allTimeSong3" placeholder="Song Name"></div>
+                        <div class="input-row"><span class="number">4</span><input type="text" class="custom-input" id="allTimeSong4" placeholder="Song Name"></div>
+                        <div class="input-row"><span class="number">5</span><input type="text" class="custom-input" id="allTimeSong5" placeholder="Song Name"></div>
+                    </div>
+                </div>
+
+                <!-- Groups Section -->
+                <div class="list-section">
+                    <h3>Top 10 Boy Groups 💙</h3>
+                    <div class="list-inputs" id="bgList">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <div class="list-section">
+                    <h3>Top 10 Girl Groups 🩷</h3>
+                    <div class="list-inputs" id="ggList">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+            </div>
+
+            <button type="submit" class="submit-btn" id="saveTopListsBtn">
+                <span>Save Top Lists</span>
+            </button>
+            <div id="topListsSavedMsg" class="saved-msg hidden">Saved successfully! ✨</div>
+        </form>
+    </main>
+
+    <!-- The generated data file containing kpopData variable -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
