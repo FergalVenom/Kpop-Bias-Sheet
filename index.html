@@ -46,13 +46,26 @@
         </header>
 
         <form class="glass-form" id="biasForm">
+            <!-- Category Selection -->
+            <div class="form-group">
+                <label for="categorySelect">Select Category</label>
+                <div class="custom-select-wrapper">
+                    <select id="categorySelect" name="category" required>
+                        <option value="" disabled selected>Select a category...</option>
+                        <option value="girlGroups">Girl Groups</option>
+                        <option value="boyGroups">Boy Groups</option>
+                        <option value="coedGroups">Co-ed Groups</option>
+                        <option value="soloists">Soloists</option>
+                    </select>
+                </div>
+            </div>
+
             <!-- Group Selection -->
             <div class="form-group">
                 <label for="groupSelect">Select Group</label>
                 <div class="custom-select-wrapper">
                     <select id="groupSelect" name="group" required>
                         <option value="" disabled selected>Select a group...</option>
-                        <!-- Options will be populated by JS -->
                     </select>
                 </div>
             </div>
@@ -199,7 +212,7 @@
     </main>
 
     <!-- The generated data file containing kpopData variable -->
-    <script src="data.js?v=2"></script>
-    <script src="script.js?v=2"></script>
+    <script src="data.js?v=3"></script>
+    <script src="script.js?v=3"></script>
 </body>
 </html>

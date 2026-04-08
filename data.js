@@ -366,13 +366,7 @@ const kpopData = {
       "Coco",
       "Sori"
     ],
-    "CORTIS": [
-      "James",
-      "Juhoon",
-      "Keonho",
-      "Martin",
-      "Seonghyeon"
-    ],
+
     "Cosmic Girls": [
       "Seola",
       "Xuanyi",
@@ -1779,6 +1773,13 @@ const kpopData = {
       "Taeyoung",
       "Wonjin",
       "Woobin"
+    ],
+    "CORTIS": [
+      "James",
+      "Juhoon",
+      "Keonho",
+      "Martin",
+      "Seonghyeon"
     ],
     "Cross Gene": [
       "Shin",

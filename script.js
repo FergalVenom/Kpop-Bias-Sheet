@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // DOM Elements - Main Form
     const mainScreen = document.getElementById("mainScreen");
     const collectionScreen = document.getElementById("collectionScreen");
+    const categorySelect = document.getElementById("categorySelect");
     const groupSelect = document.getElementById("groupSelect");
     const biasSelect = document.getElementById("biasSelect");
     const wrecker1Select = document.getElementById("wrecker1Select");
@@ -134,26 +135,23 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Populate Groups from kpopData
-    // We put a slight delay just in case data.js loads slowly, though it should be synchronous.
+    // Populate Groups from kpopData when a category is chosen
     if (typeof kpopData !== 'undefined' && kpopData.girlGroups && kpopData.boyGroups) {
-        const fragment = document.createDocumentFragment();
-        const appendOptGroup = (label, groupsObj) => {
-            const optGroup = document.createElement("optgroup");
-            optGroup.label = label;
-            Object.keys(groupsObj).forEach(groupName => {
+        categorySelect.addEventListener("change", (e) => {
+            const category = e.target.value;
+            const groupsObj = kpopData[category] || {};
+            
+            groupSelect.innerHTML = '<option value="" disabled selected>Select a group...</option>';
+            Object.keys(groupsObj).sort((a,b)=>a.toLowerCase().localeCompare(b.toLowerCase())).forEach(groupName => {
                 const option = document.createElement("option");
                 option.value = groupName;
                 option.textContent = groupName;
-                optGroup.appendChild(option);
+                groupSelect.appendChild(option);
             });
-            fragment.appendChild(optGroup);
-        };
-        appendOptGroup("Girl Groups", kpopData.girlGroups);
-        appendOptGroup("Boy Groups", kpopData.boyGroups);
-        appendOptGroup("Co-ed Groups", kpopData.coedGroups);
-        appendOptGroup("Soloists", kpopData.soloists);
-        groupSelect.appendChild(fragment);
+            membersSection.classList.add("hidden");
+            submitBtn.classList.add("hidden");
+            submitBtn.classList.remove("slide-in");
+        });
     } else {
         console.error("kpopData is not properly loaded! Make sure data.js is functioning.");
     }
@@ -318,11 +316,12 @@ document.addEventListener("DOMContentLoaded", () => {
     resetBtn.addEventListener("click", () => {
         resultCard.classList.add("hidden");
         biasForm.reset();
+        groupSelect.innerHTML = '<option value="" disabled selected>Select a group...</option>';
         membersSection.classList.add("hidden");
         submitBtn.classList.add("hidden");
         submitBtn.classList.remove("slide-in");
         biasForm.classList.remove("hidden");
-        setTimeout(() => groupSelect.focus(), 100);
+        setTimeout(() => categorySelect.focus(), 100);
     });
 
     // --- TOP LISTS FORM CREATION ---
