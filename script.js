@@ -414,4 +414,32 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    // --- POPULATE FRIENDS DROPDOWN ---
+    async function populateFriendsList() {
+        try {
+            const usersRef = db.collection("users");
+            const snapshot = await usersRef.get();
+            const friendSelect = document.getElementById("friendUsername");
+            if (!friendSelect) return;
+            
+            friendSelect.innerHTML = '<option value="" disabled selected>Select friend...</option>';
+            
+            const users = [];
+            snapshot.forEach(doc => {
+                users.push(doc.id);
+            });
+            
+            users.sort().forEach(username => {
+                const opt = document.createElement("option");
+                opt.value = username;
+                opt.textContent = username;
+                friendSelect.appendChild(opt);
+            });
+        } catch (e) {
+            console.error("Error fetching friends:", e);
+        }
+    }
+
+    populateFriendsList();
 });

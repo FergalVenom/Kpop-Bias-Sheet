@@ -26,7 +26,11 @@
         </div>
         <div class="friend-control" style="display: flex; gap: 0.5rem; align-items: center;">
             <label for="friendUsername" style="margin: 0; white-space: nowrap;">🔍 Friend:</label>
-            <input type="text" id="friendUsername" class="custom-input" style="padding: 0.5rem; font-size: 0.9rem;" placeholder="Friend's name...">
+            <div class="custom-select-wrapper" style="min-width: 150px;">
+                <select id="friendUsername" class="custom-input" style="padding: 0.5rem; font-size: 0.9rem;">
+                    <option value="" disabled selected>Select friend...</option>
+                </select>
+            </div>
             <button id="loadFriendBtn" class="shortcut-btn" style="margin: 0; padding: 0.5rem 1rem;">View</button>
             <button id="reloadMeBtn" class="shortcut-btn hidden" style="margin: 0; padding: 0.5rem 1rem; border-color: var(--primary);">Exit View</button>
         </div>
