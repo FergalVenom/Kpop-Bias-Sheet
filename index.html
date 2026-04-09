@@ -212,7 +212,9 @@
     </main>
 
     <!-- The generated data file containing kpopData variable -->
-    <script src="data.js?v=3"></script>
-    <script src="script.js?v=3"></script>
+    <script>
+        document.write('<script src="data.js?t=' + Date.now() + '"><\/script>');
+        document.write('<script src="script.js?t=' + Date.now() + '"><\/script>');
+    </script>
 </body>
 </html>
