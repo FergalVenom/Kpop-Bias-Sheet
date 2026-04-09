@@ -1409,7 +1409,15 @@ const kpopData = {
       "Nakyoung",
       "Xinyu",
       "Mayu",
-      "Yooyeon"
+      "Yooyeon",
+      "Lynn",
+      "JooBin",
+      "HaYeon",
+      "ShiOn",
+      "ChaeWon",
+      "Sullin",
+      "SeoAh",
+      "JiYeon"
     ],
     "TWICE": [
       "Tzuyu",
@@ -1967,11 +1975,50 @@ const kpopData = {
       "Chenle",
       "Jisung"
     ],
+    "NCT U": [
+      "Taeil",
+      "Johnny",
+      "Taeyong",
+      "Yuta",
+      "Kun",
+      "Doyoung",
+      "Ten",
+      "Jaehyun",
+      "Winwin",
+      "Jungwoo",
+      "Lucas",
+      "Mark",
+      "Xiaojun",
+      "Hendery",
+      "Renjun",
+      "Jeno",
+      "Haechan",
+      "Jaemin",
+      "Yangyang",
+      "Chenle",
+      "Jisung",
+      "Shotaro",
+      "Sungchan"
+    ],
+    "NCT WISH": [
+      "Sion",
+      "Riku",
+      "Yushi",
+      "Jaehee",
+      "Ryo",
+      "Sakuya"
+    ],
     "Nu'est": [
       "JR",
       "Aron",
       "Baekho",
       "Minhyun",
+      "Ren"
+    ],
+    "Nu'est W": [
+      "JR",
+      "Aron",
+      "Baekho",
       "Ren"
     ],
     "OMEGA X": [
@@ -2360,6 +2407,9 @@ const kpopData = {
   "soloists": {
     "Agust D": [
       "Agust D"
+    ],
+    "G-Dragon": [
+      "G-Dragon"
     ],
     "Ailee": [
       "Ailee"
