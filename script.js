@@ -227,6 +227,23 @@ document.addEventListener("DOMContentLoaded", () => {
     goToCollectionBtn.addEventListener("click", showCollection);
     backToMainBtn.addEventListener("click", showMainScreen);
 
+    const updateDropdownOptions = () => {
+        const selects = [biasSelect, wrecker1Select, wrecker2Select];
+        const selectedValues = selects.map(sel => sel.value).filter(val => val !== "None" && val !== "");
+
+        selects.forEach(select => {
+            Array.from(select.options).forEach(option => {
+                if (option.value !== "None" && option.value !== "") {
+                    option.disabled = selectedValues.includes(option.value) && option.value !== select.value;
+                }
+            });
+        });
+    };
+
+    biasSelect.addEventListener("change", updateDropdownOptions);
+    wrecker1Select.addEventListener("change", updateDropdownOptions);
+    wrecker2Select.addEventListener("change", updateDropdownOptions);
+
     groupSelect.addEventListener("change", (e) => {
         const selectedGroup = e.target.value;
         const isSoloist = !!(kpopData.soloists && kpopData.soloists[selectedGroup]);
@@ -252,6 +269,8 @@ document.addEventListener("DOMContentLoaded", () => {
         populateMembers(wrecker1Select, existingData.wrecker1);
         populateMembers(wrecker2Select, existingData.wrecker2);
         favSongInput.value = existingData.favSong || '';
+        
+        updateDropdownOptions();
 
         if (isSoloist) {
             biasSelect.closest(".form-group").classList.add("hidden");
