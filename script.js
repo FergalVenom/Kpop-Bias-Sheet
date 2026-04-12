@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentUsername = localStorage.getItem("kpopUsername") || "";
     let viewingUsername = ""; // Empty means viewing self
     let savedBiases = {};
-    let topListsData = { currSongs: [], allTimeSongs: [], boyGroups: [], girlGroups: [] };
+    let topListsData = { currSongs: [], allTimeSongs: [], boyGroups: [], girlGroups: [], maleBiases: [], femaleBiases: [] };
 
     const currentUserInput = document.getElementById("currentUsername");
     const friendUserInput = document.getElementById("friendUsername");
@@ -99,10 +99,10 @@ document.addEventListener("DOMContentLoaded", () => {
             if (docSnap.exists) {
                 const data = docSnap.data();
                 savedBiases = data.biases || {};
-                topListsData = data.topLists || { currSongs: [], allTimeSongs: [], boyGroups: [], girlGroups: [] };
+                topListsData = data.topLists || { currSongs: [], allTimeSongs: [], boyGroups: [], girlGroups: [], maleBiases: [], femaleBiases: [] };
             } else {
                 savedBiases = {};
-                topListsData = { currSongs: [], allTimeSongs: [], boyGroups: [], girlGroups: [] };
+                topListsData = { currSongs: [], allTimeSongs: [], boyGroups: [], girlGroups: [], maleBiases: [], femaleBiases: [] };
             }
             
             // Re-render UI depending on which screen is active
@@ -375,11 +375,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const loadTopListsDataUI = () => {
+        // Ensure defaults if missing from old saved data
+        if (!topListsData.maleBiases) topListsData.maleBiases = [];
+        if (!topListsData.femaleBiases) topListsData.femaleBiases = [];
+
         for(let i=1; i<=5; i++) {
             const curr = document.getElementById(`currSong${i}`);
             const allT = document.getElementById(`allTimeSong${i}`);
+            const mb = document.getElementById(`maleBias${i}`);
+            const fb = document.getElementById(`femaleBias${i}`);
             if(curr) curr.value = topListsData.currSongs[i-1] || "";
             if(allT) allT.value = topListsData.allTimeSongs[i-1] || "";
+            if(mb) mb.value = topListsData.maleBiases[i-1] || "";
+            if(fb) fb.value = topListsData.femaleBiases[i-1] || "";
         }
         for(let i=1; i<=10; i++) {
             const bgSelect = document.getElementById(`bgGroup${i}`);
@@ -425,11 +433,17 @@ document.addEventListener("DOMContentLoaded", () => {
             
             topListsData.currSongs = [];
             topListsData.allTimeSongs = [];
+            topListsData.maleBiases = [];
+            topListsData.femaleBiases = [];
             for(let i=1; i<=5; i++) {
                 const curr = document.getElementById(`currSong${i}`);
                 const allT = document.getElementById(`allTimeSong${i}`);
+                const mb = document.getElementById(`maleBias${i}`);
+                const fb = document.getElementById(`femaleBias${i}`);
                 if(curr) topListsData.currSongs.push(curr.value.trim());
                 if(allT) topListsData.allTimeSongs.push(allT.value.trim());
+                if(mb) topListsData.maleBiases.push(mb.value.trim());
+                if(fb) topListsData.femaleBiases.push(fb.value.trim());
             }
             
             topListsData.boyGroups = [];
